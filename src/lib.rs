@@ -708,7 +708,7 @@ impl Consul {
                 .await
                 .map_err(|e| ConsulError::UnexpectedResponseCode(status, e.to_string()))?;
             let bytes = response_body.copy_to_bytes(response_body.remaining());
-            let resp = std::str::from_utf8(&*bytes)
+            let resp = std::str::from_utf8(&bytes)
                 .map_err(|e| ConsulError::UnexpectedResponseCode(status, e.to_string()))?;
             return Err(ConsulError::UnexpectedResponseCode(
                 status,
